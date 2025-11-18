@@ -1,3 +1,5 @@
+Hi 👋
+I'm an undergrad studying data & comp sci at UON
 <!--
 ## Hi there 👋
 
