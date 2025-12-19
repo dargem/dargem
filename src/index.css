@@ -8,7 +8,7 @@ body {
     width: 100dvw;
     overflow: hidden;
     height: 100dvh;
-    background-image: url("files/images/mac-wallpaper.avif");
+    background-image: url("files/images/arch.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -84,7 +84,7 @@ body {
         @apply absolute bottom-2 left-1/2 -translate-x-1/2 z-50 select-none max-sm:hidden;
         
         .dock-container {
-            @apply bg-[rgb(24,24,36)]/80 backdrop-blur-md justify-between rounded-xl p-1.5 flex items-end gap-1.5;
+            @apply bg-[rgb(24,24,36)]/80 backdrop-blur-md justify-between rounded-xl p-1.5 flex items-end gap-4;
         }
         
         .tooltip {

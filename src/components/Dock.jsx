@@ -23,11 +23,11 @@ const Dock = () => {
                 const center = icon_left - left + width/2;
                 const distance = Math.abs(mouseX - center);
 
-                const intensity = Math.exp(-(distance**2.5) / 20000);
+                const intensity = Math.exp(-(distance**3) / 60000);
 
                 gsap.to(icon, {
-                    scale: 1 + 0.25 * intensity,
-                    y: -15 * intensity,
+                    scale: 1 + 0.1 * intensity,
+                    y: -5 * intensity,
                     duration: 0.2,
                     ease: "power1.out",
                 });
@@ -88,7 +88,7 @@ const Dock = () => {
                             onClick={() => toggleApp({id, canOpen})}
                         >
                             <img 
-                                src={`files/images/${icon}`} 
+                                src={`files/icons/${icon}`} 
                                 alt={name}
                                 loading="lazy"
                                 className={canOpen ? '' : 'opacity-60'}
