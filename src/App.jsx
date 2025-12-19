@@ -1,13 +1,12 @@
-import NavBar from "#components/NavBar.jsx"
+import { NavBar, Dock } from "#components";
 
 const App = () => {
     return (
         <div>
             <NavBar />
-            <h1>Test</h1>
-            <h1 className="text-3xl font-bold underline">Welcome</h1>
+            <Dock />
         </div>
-    )
-}
+    );
+};
 
-export default App
+export default App;

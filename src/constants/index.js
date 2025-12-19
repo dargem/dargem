@@ -23,19 +23,7 @@ const navIcons = [
     },
     {
         id: "battery",
-        img: "files/icons/battery.avif",
-    },
-    {
-        id: "notifications",
-        img: "files/icons/bell.svg",
-    },
-    {
-        id: "audio",
-        img: "files/icons/audio.svg"
-    },
-    {
-        id: "mic",
-        img: "files/icons/mic.svg"
+        img: "files/icons/battery2.png",
     },
     {
         id: "power_off",

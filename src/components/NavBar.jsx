@@ -4,9 +4,9 @@ import { navLinks, navIcons } from "#constants";
 
 const NavBar = () => {
     return (
-        <nav className="mt-2 ml-2 mr-2">
+        <nav>
             <div>
-                <img src="/files/images/endeavour_logo.svg" alt="logo" className="w-6 h-6"/>
+                <img src="/files/images/endeavour_logo.svg" alt="logo" className="h-6"/>
                 <p className="font-bold">My Portfolio</p>
 
                 <ul>
@@ -19,21 +19,25 @@ const NavBar = () => {
             </div>
 
             <div>
+                <time className="text-white">{dayjs().format('ddd D MMM h:mm A')}</time>
+            </div>
+
+            <div>
                 <ul className="flex items-center gap-5 list-none">
                     {navIcons.map(({ id, img }) => (
                         <li key={id}>
                             <img 
                                 src={img} 
-                                className="icon-hover icon w-6 h-6" 
+                                className="icon-hover icon h-6 invert brightness-0" 
                                 alt={`icon-${id}`}
                             />
+                            
                         </li>
                     ))}
                 </ul>
-                <time>{dayjs().format('ddd MMM D h:mm A')}</time>
             </div>
         </nav>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;
