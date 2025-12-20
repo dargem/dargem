@@ -7,17 +7,22 @@ const WindowWrapper = (Component, windowKey) => {
         const { isOpen, zIndex } = windows[windowKey];
         const ref = useRef(null);
 
-        return <section 
-            id={windowKey} 
-            style={{zIndex}}
-            className="absolute"
-        >
-            <Component />
-        </section>
+        if (!isOpen) return null;
+
+        return (
+            <section 
+                id={windowKey} 
+                ref={ref}
+                style={{ zIndex }}
+                className="absolute"
+            >
+                <Component {... props}/>
+            </section>
+        );
     };
     
     Wrapped.displayName = `WindowWrapper(${Component.displayName || Component.name || "Component"})`;
-    return <div>WindowWrapper</div>;
+    return Wrapped;
 };
 
 export default WindowWrapper; 
