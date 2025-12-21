@@ -1,4 +1,5 @@
 import useWindowStore from "#store/window.js";
+import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 
 const WindowWrapper = (Component, windowKey) => {
@@ -7,7 +8,12 @@ const WindowWrapper = (Component, windowKey) => {
         const { isOpen, zIndex } = windows[windowKey];
         const ref = useRef(null);
 
-        if (!isOpen) return null;
+        useGSAP(() => {
+            const el = ref.current;
+            if(!el || !isOpen) return;
+
+            el.style.display = "block";
+        }, [isOpen]);
 
         return (
             <section 
