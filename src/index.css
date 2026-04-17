@@ -219,17 +219,21 @@ body {
         }
         
         h3 {
-            @apply text-xl font-semibold;
+            @apply rounded-lg text-2xl origin-center font-semibold text-center font-roboto
+        }
+
+        p {
+            @apply font-roboto p-1 text-center pb-4
         }
         
         ul {
-            @apply flex items-center gap-3;
+            @apply flex items-center gap-3 font-roboto p-3 justify-center;
             
             li {
-                @apply rounded-lg p-3 w-60 hover:-translate-y-0.5 hover:scale-105 origin-center transition-all duration-300;
+                @apply rounded-lg p-3 text-xl w-60 hover:scale-105 origin-center transition-all duration-300;
                 
                 a {
-                    @apply space-y-5;
+                    @apply flex items-center gap-2 justify-center;
                 }
                 
                 p {
@@ -237,6 +241,8 @@ body {
                 }
             }
         }
+
+        
     }
     
     #photos {
