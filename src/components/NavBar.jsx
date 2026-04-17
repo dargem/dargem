@@ -1,17 +1,34 @@
 import dayjs from "dayjs";
 
 import { navLinks, navIcons } from "#constants";
+import useWindowStore from "#store/window.js";
 
 const NavBar = () => {
+
+    const { openWindow, closeWindow, windows } = useWindowStore();
+
+    const toggleApp = (type) => {
+        // open window logic
+        // if (!app.canOpen) return;
+
+        const win = windows[type];
+        if (win.isOpen) {
+            closeWindow(type);
+        } else {
+            openWindow(type);
+        }
+
+        console.log(windows);
+    };
+
     return (
         <nav>
             <div>
                 <img src="/files/images/arch_logo.png" alt="logo" className="h-6"/>
                 <p className="font-bold">My Portfolio</p>
-
                 <ul>
-                    {navLinks.map(({ id, name }) => (
-                        <li key={id}>
+                    {navLinks.map(({ id, name, type }) => (
+                        <li key={id} onClick={() => toggleApp(type)}>
                             <p>{name}</p>
                         </li>
                     ))}
