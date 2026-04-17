@@ -1,7 +1,8 @@
 import gsap from "gsap";
+import { Draggable } from "gsap/all";
+
 import { NavBar, Dock } from "#components";
 import { TerminalWindow } from "#windows";
-import { Draggable } from "gsap/all";
 gsap.registerPlugin(Draggable);
 
 const App = () => {

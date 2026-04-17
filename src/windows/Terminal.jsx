@@ -1,9 +1,10 @@
 import WindowWrapper from "#hoc/WindowWrapper";
+import WindowControls from "#components/WindowControls";
 
 const Terminal = () => {
     return <>
     <div id="window-header">
-        <p>Window Controls</p>
+        <WindowControls target="terminal"/>
         <h2>Tech Stack</h2>
     </div>
 
@@ -19,10 +20,11 @@ const Terminal = () => {
             <br />
             Hey, I'm an undergrad at the University of Newcastle, studying a double in computer & data science.
             In my spare time I like learning topics that peak my fancy, from humanoid soccer robots as a member of NUBots, 
-            to computer graphics, concave polygon packing, machine learning and much more. 
+            to computer graphics, data orientated design, questionable C++ "features" like stateful metaprogramming and much more. 
             <br /><br />
-            My preferred languages are Python and Java though I've started to enjoy using C++ in some more performance critical side projects.
-            While I like Java it can be quite frustrating at times with stuff like it lacking stack based object allocation so I'm looking forwards to value classes from project Valhalla even if its not in JDK 26.
+            My languages are C++, Java, Python and R. My preference is C++ for my larger performance critical side projects and Java where performance isn't a concern. 
+            Python I use for competitive programming where optimizing for big O complexity is all that matters and data analytics.
+            R is my go to for any sort of statistical testing.            
         </p>
 
     </div>
