@@ -37,24 +37,35 @@ const dockApps = [
         name: "Portfolio", // was "Finder"
         icon: "folder.png",
         canOpen: true,
+        scale: 0.95,
     },
     {
         id: "terminal",
         name: "whoami", // was "Terminal"
         icon: "terminal.png",
         canOpen: true,
+        scale: 0.95,
     },
     {
         id: "contact",
         name: "Contact", // or "Get in touch"
         icon: "email.png",
         canOpen: true,
+        scale: 1.1
+    },
+    {
+        id: "blogs",
+        name: "Blogs",
+        icon: "icone-blog-et-blogger-bleu.png",
+        canOpen: true,
+        scale: 0.75
     },
     {
         id: "trash",
         name: "Archive", // was "Trash"
         icon: "bin.png",
         canOpen: false,
+        scale: 1.03
     },
 ];
 

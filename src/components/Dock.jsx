@@ -24,9 +24,10 @@ const Dock = () => {
                 const distance = Math.abs(mouseX - center);
 
                 const intensity = Math.exp(-(distance**3) / 60000);
+                const baseScale = parseFloat(icon.getAttribute("data-scale") || "1");
 
                 gsap.to(icon, {
-                    scale: 1 + 0.1 * intensity,
+                    scale: baseScale + 0.1 * intensity,
                     y: -5 * intensity,
                     duration: 0.2,
                     ease: "power1.out",
@@ -40,14 +41,15 @@ const Dock = () => {
         };
 
         const resetIcons = () => {
-            icons.forEach((icon) => 
+            icons.forEach((icon) => {
+                const baseScale = parseFloat(icon.getAttribute("data-scale") || "1");
                 gsap.to(icon, {
-                    scale: 1,
+                    scale: baseScale,
                     y: 0,
                     duration: 0.3,
                     ease: "power1.out",
-                }),
-            );
+                });
+            });
         };
 
         dock.addEventListener('mousemove', handleMouseMove);
@@ -75,7 +77,7 @@ const Dock = () => {
     return (
         <section id="dock">
             <div ref={dockRef} className="dock-container">
-                {dockApps.map(({id, name, icon, canOpen}) => (
+                {dockApps.map(({id, name, icon, canOpen, scale}) => (
                     <div key={id ?? name} className="relative flex justify-center">
                         <button 
                             type="button" 
@@ -86,12 +88,14 @@ const Dock = () => {
                             data-tooltip-delay-show={150}
                             disabled={!canOpen}
                             onClick={() => toggleApp({id, canOpen})}
+                            data-scale={scale || 1}
+                            style={{ transform: `scale(${scale || 1})` }}
                         >
                             <img 
                                 src={`files/icons/${icon}`} 
                                 alt={name}
                                 loading="lazy"
-                                className={canOpen ? '' : 'opacity-60'}
+                                className={canOpen ? '' : 'opacity-100'}
                             />
                         </button>
                         <Tooltip id="dock-tooltip" place="top" className="tooltip" />
