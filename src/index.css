@@ -425,6 +425,10 @@ body {
         color: #1f2937;
         line-height: 1.6;
         
+        video, iframe {
+            @apply w-full rounded-lg my-4 aspect-video;
+        }
+
         h1 {
             @apply text-2xl font-bold mb-4 mt-2 border-b pb-2 border-gray-200;
         }
