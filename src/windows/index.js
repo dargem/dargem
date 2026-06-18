@@ -1,5 +1,6 @@
 import TerminalWindow from "#windows/Terminal.jsx";
 import ResumeWindow from "#windows/Resume.jsx"
 import ContactWindow from "#windows/Contact.jsx"
+import MarkdownWindowContent from "#windows/MarkdownWindow.jsx";
 
-export { TerminalWindow, ResumeWindow, ContactWindow };
+export { TerminalWindow, ResumeWindow, ContactWindow, MarkdownWindowContent };

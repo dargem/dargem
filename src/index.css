@@ -416,4 +416,56 @@ body {
             }
         }
     }
+
+    section[id^="markdown-"] {
+        @apply w-2xl absolute top-32 left-1/4 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    }
+
+    .markdown-body {
+        color: #1f2937;
+        line-height: 1.6;
+        
+        h1 {
+            @apply text-2xl font-bold mb-4 mt-2 border-b pb-2 border-gray-200;
+        }
+        h2 {
+            @apply text-xl font-semibold mb-3 mt-4 border-b pb-1 border-gray-100;
+        }
+        h3 {
+            @apply text-lg font-semibold mb-2 mt-3;
+        }
+        p {
+            @apply mb-4 text-sm text-gray-700;
+        }
+        ul {
+            @apply list-disc list-inside mb-4 pl-4 text-sm text-gray-700;
+            li {
+                @apply mb-1;
+            }
+        }
+        ol {
+            @apply list-decimal list-inside mb-4 pl-4 text-sm text-gray-700;
+            li {
+                @apply mb-1;
+            }
+        }
+        code {
+            @apply bg-gray-100 text-red-600 px-1.5 py-0.5 rounded font-mono text-xs;
+        }
+        pre {
+            @apply bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4 font-mono text-xs;
+            code {
+                @apply bg-transparent text-inherit p-0 rounded-none;
+            }
+        }
+        blockquote {
+            @apply border-l-4 border-gray-300 pl-4 italic text-gray-600 mb-4;
+        }
+        strong {
+            @apply font-bold text-gray-900;
+        }
+        a {
+            @apply text-blue-600 hover:underline;
+        }
+    }
 }

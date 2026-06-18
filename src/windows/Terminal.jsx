@@ -18,13 +18,25 @@ const Terminal = () => {
             <span className="font-bold">(base) @Tristan:~% td$ </span>
             actually though
             <br />
-            Hey, I'm an undergrad at the University of Newcastle, studying a double in computer & data science.
-            In my spare time I like learning topics that peak my fancy, from humanoid soccer robots as a member of NUBots, 
-            to computer graphics, data orientated design, questionable C++ "features" like stateful metaprogramming and much more. 
-            <br /><br />
+            I'm an undergrad at the University of Newcastle, studying a double in computer & data science.
+            In my spare time I like learning topics that peak my fancy, ranging from:
+
+            <br />
+            <br />
+            <ul class="list-disc list-inside pl-5">
+                <li>Data orientated design</li>
+                <li>Humanoid soccer robots</li>
+                <li>Template metaprogramming</li>
+                <li>Competitive programming</li>
+                <li>Benchmarking programs</li>
+                <li>Random number generators</li>
+                <li>Questionable C++ "features"</li>
+            </ul>
+            
+            <br />
             My languages are C++, Java, Python and R. My preference is C++ for my larger performance critical side projects and Java where performance isn't a concern. 
-            Python I use for competitive programming where optimizing for big O complexity is all that matters and data analytics.
-            R is my go to for any sort of statistical testing.            
+            Python I use for competitive programming as well as for my quick and dirty projects.
+            R I like for statistical testing.
         </p>
 
     </div>
