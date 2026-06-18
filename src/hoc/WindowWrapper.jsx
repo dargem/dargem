@@ -22,10 +22,10 @@ const WindowWrapper = (Component, windowKey) => {
             const winWidth = el.offsetWidth || 672;
             const winHeight = el.offsetHeight || 450;
 
-            let randomX = (Math.random() - 0.5) * screenWidth / 4;
+            let randomX = (Math.random() - 0.5) * screenWidth / 5;
             randomX += randomX > 0 ? screenWidth / 15 : -screenWidth / 15; // Give an extra push away from the centre
 
-            const randomY = (Math.random() - 0.5) * screenHeight / 4;
+            const randomY = (Math.random() - 0.5) * screenHeight / 6;
 
             const targetLeft = Math.max(20, screenWidth / 2 - winWidth / 2 + randomX);
             const targetTop = Math.max(60, screenHeight / 2 - winHeight / 2 + randomY);
