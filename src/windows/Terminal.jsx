@@ -5,7 +5,7 @@ const Terminal = () => {
     return <>
     <div id="window-header">
         <WindowControls target="terminal"/>
-        <h2>Tech Stack</h2>
+        <h2>Terminal</h2>
     </div>
 
     <div className="techstack">
@@ -37,6 +37,14 @@ const Terminal = () => {
             My languages are C++, Java, Python and R. My preference is C++ for my larger performance critical side projects and Java where performance isn't a concern. 
             Python I use for competitive programming as well as for my quick and dirty projects.
             R I like for statistical testing.
+
+            <br />
+            <br />
+            Click on the navbar /or folders to create a window. 
+            Each of the desktop folders are my personal projects,
+            and in the trash bin lies projects I've scrapped.
+            The blog consists of a large series of interesting benchmarks and C++ features.
+            Click on the cross, or alternatively the terminal in the dock to close this.
         </p>
 
     </div>
