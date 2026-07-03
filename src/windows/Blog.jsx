@@ -4,6 +4,48 @@ import WindowWrapper from "#hoc/WindowWrapper";
 import React, { useState, useEffect } from 'react';
 import { marked } from "marked";
 
+const createHeadingId = (text, counts) => {
+    const baseId = (text || "")
+        .toLowerCase()
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s-]/g, "")
+        .trim()
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+
+    const nextCount = counts.get(baseId) ?? 0;
+    counts.set(baseId, nextCount + 1);
+
+    return nextCount === 0 ? baseId : `${baseId}-${nextCount}`;
+};
+
+const renderMarkdownWithHeadingIds = (markdown) => {
+    const normalizedMarkdown = (markdown || "").replace(
+        /\[\[no_unique_address\]\]/g,
+        "\\[\\[no_unique_address\\]\\]"
+    );
+    const html = marked.parse(normalizedMarkdown);
+    const document = new DOMParser().parseFromString(html, "text/html");
+    const counts = new Map();
+
+    document.querySelectorAll("h1, h2, h3, h4, h5, h6").forEach((heading) => {
+        heading.id = createHeadingId(heading.textContent, counts);
+    });
+
+    const tableOfContentsHeading = Array.from(document.querySelectorAll("h1")).find(
+        (heading) => heading.textContent?.trim() === "Table of Contents"
+    );
+
+    if (tableOfContentsHeading?.nextElementSibling?.tagName === "UL") {
+        tableOfContentsHeading.nextElementSibling
+            .querySelectorAll("li > p")
+            .forEach((paragraph) => paragraph.replaceWith(...paragraph.childNodes));
+    }
+
+    return document.body.innerHTML;
+};
+
 const Blogs = () => {
 
     const [readmeText, setReadmeText] = useState('');
@@ -41,26 +83,11 @@ const Blogs = () => {
                 <h2>Benchmark Blogs</h2>
             </div>
 
-            <p>
-                A collection of benchmarks and interesting performance related C++ features. 
-                Largely based on various optimizations I've heard about but was interested in finding the extend of the benefit.
-            </p>
-
-            <br/>
-
             { worked 
                 ? <div 
                     className="markdown-body p-6 overflow-y-auto max-h-[70vh] font-sans select-text"
-                    dangerouslySetInnerHTML={{ __html: marked.parse(readmeText || "") }}/> 
+                    dangerouslySetInnerHTML={{ __html: renderMarkdownWithHeadingIds(readmeText) }}/> 
                 : <p>{readmeText}</p> }
-
-            {/* <Document file="/files/Resume.pdf">
-                <Page pageNumber={1} 
-                scale={1.15}
-                renderTextlayer 
-                renderAnnotationLayer 
-            />
-            </Document> */}
 
         </>
     )

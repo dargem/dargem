@@ -259,37 +259,7 @@ body {
     }
 
     #blogs {
-        @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
-        
-        h2 {
-            @apply font-bold text-sm text-center w-full;
-        }
-        
-        h3 {
-            @apply rounded-lg text-2xl origin-center font-semibold text-center font-roboto
-        }
-
-        p {
-            @apply font-roboto p-1 text-center pb-4
-        }
-        
-        ul {
-            @apply flex items-center gap-3 font-roboto p-3 justify-center;
-            
-            li {
-                @apply rounded-lg p-3 text-xl w-60 hover:scale-105 origin-center transition-all duration-300;
-                
-                a {
-                    @apply flex items-center gap-2 justify-center;
-                }
-                
-                p {
-                    @apply font-semibold text-sm text-white;
-                }
-            }
-        }
-
-        
+        @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden gap-2;
     }
     
     #photos {
