@@ -3,7 +3,7 @@ import { WindowControls } from "#components/index.js";
 
 const Contact = () => {
     return <>
-    <div id="window-header">
+    <div className="window-header">
         <WindowControls target="contact"/>
         <h2>My Contacts</h2>
     </div>

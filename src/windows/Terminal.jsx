@@ -3,7 +3,7 @@ import WindowControls from "#components/WindowControls";
 
 const Terminal = () => {
     return <>
-    <div id="window-header">
+    <div className="window-header">
         <WindowControls target="terminal"/>
         <h2>Terminal</h2>
     </div>

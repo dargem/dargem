@@ -19,6 +19,8 @@ const markdownWindows = {};
 markdownWindowsList.forEach(({ key, title, content }) => {
     markdownWindows[key] = {
         isOpen: false,
+        size: null,
+        position: null,
         zIndex: INITIAL_Z_INDEX,
         data: {
             title,
@@ -53,6 +55,14 @@ const useWindowStore = create(
         focusWindow: (windowKey) => set((state) => {
             const win = state.windows[windowKey];
             win.zIndex = state.nextZIndex++;
+        }),
+
+        setWindowSize: (windowKey, size) => set((state) => {
+            state.windows[windowKey].size = size;
+        }),
+
+        setWindowPosition: (windowKey, position) => set((state) => {
+            state.windows[windowKey].position = position;
         }),
 })));
 

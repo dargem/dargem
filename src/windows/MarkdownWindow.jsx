@@ -6,7 +6,7 @@ const MarkdownWindowContent = ({ title, content, windowKey }) => {
 
     return (
         <>
-            <div id="window-header">
+            <div className="window-header">
                 <WindowControls target={windowKey} />
                 <h2>{title}.md</h2>
             </div>

@@ -78,7 +78,7 @@ const Blogs = () => {
 
     return (
         <>
-            <div id="window-header">
+            <div className="window-header">
                 <WindowControls target="blogs"/>
                 <h2>Benchmark Blogs</h2>
             </div>
