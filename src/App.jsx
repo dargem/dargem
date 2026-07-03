@@ -30,7 +30,7 @@ const App = () => {
             <TerminalWindow/>
             <ContactWindow/>
             <ResumeWindow/>
-            {/* <BlogsWindow/> */}
+            <BlogsWindow/>
 
             {dynamicWindows.map(({ key, Wrapped }) => (
                 <Wrapped key={key} />

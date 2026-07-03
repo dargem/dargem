@@ -1,32 +1,65 @@
-import WindowWrapper from "#hoc/WindowWrapper";
 import { WindowControls } from "#components/index.js";
+import WindowWrapper from "#hoc/WindowWrapper";
+
+import React, { useState, useEffect } from 'react';
+
+import 'react-pdf/dist/Page/AnnotationLayer.css';
+import 'react-pdf/dist/Page/TextLayer.css';
 
 const Blogs = () => {
-    return <>
-    <div id="window-header">
-        <WindowControls target="blogs"/>
-        <h2>Benchmarking Blog</h2>
-    </div>
-        <ul>
-            <li>
-                <a className="items-center" href="https://github.com/dargem"><img src="/files/images/github.png" alt="logo" className="h-8"/> Github </a>
-            </li>
-            <li>
-                <a href="https://linkedin.com/in/tristan-dyson"><img src="/files/images/linkedin.png" alt="logo" className="h-8"/> Linkedin</a>
-            </li>
-        </ul>
 
-        <h3>Emails:</h3>
+    const [readmeText, setReadmeText] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-        <p>
-            tristanxdyson@gmail.com
+    useEffect(() => {
+        const url = "https://github.com/dargem/benchmark_fun/edit/main/README.md";
+        fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+            throw new Error('Failed to fetch the README file');
+            }
+            return response.text(); // Read the response body as plain text
+        })
+        .then((data) => {
+            setReadmeText(data);
+            setLoading(false);
+        })
+        .catch((err) => {
+            setError(err.message);
+            setReadmeText(`Failed to fetch the README file from GitHub. View at ${url}`);
+            setLoading(false);
+        });
+    }, []);
+
+
+    return (
+        <>
+            <div id="window-header">
+                <WindowControls target="blogs"/>
+                <h2>Benchmark Blogs</h2>
+            </div>
+
+            <p>
+                A collection of benchmarks and interesting performance related C++ features. 
+                Largely based on various optimizations I've heard about but was interested in finding the extend of the benefit.
+            </p>
+
             <br/>
-            c3412030@uon.edu.au
-        </p>
-    <div>
-        
-    </div>
-    </>;
+
+            <p>
+                {readmeText}
+            </p>
+            {/* <Document file="/files/Resume.pdf">
+                <Page pageNumber={1} 
+                scale={1.15}
+                renderTextlayer 
+                renderAnnotationLayer 
+            />
+            </Document> */}
+
+        </>
+    )
 };
 
 const BlogsWindow = WindowWrapper(Blogs, 'blogs');
