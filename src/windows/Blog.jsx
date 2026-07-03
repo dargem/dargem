@@ -2,15 +2,14 @@ import { WindowControls } from "#components/index.js";
 import WindowWrapper from "#hoc/WindowWrapper";
 
 import React, { useState, useEffect } from 'react';
-
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-import 'react-pdf/dist/Page/TextLayer.css';
+import { marked } from "marked";
 
 const Blogs = () => {
 
     const [readmeText, setReadmeText] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [worked, setWorked] = useState(null);
 
     useEffect(() => {
         const url = "https://raw.githubusercontent.com/dargem/benchmark_fun/main/README.md";
@@ -19,10 +18,12 @@ const Blogs = () => {
             if (!response.ok) {
             throw new Error('Failed to fetch the README file');
             }
+            setWorked(false);
             return response.text(); // Read the response body as plain text
         })
         .then((data) => {
             setReadmeText(data);
+            setWorked(true);
             setLoading(false);
         })
         .catch((err) => {
@@ -47,9 +48,12 @@ const Blogs = () => {
 
             <br/>
 
-            <p>
-                {readmeText}
-            </p>
+            { worked 
+                ? <div 
+                    className="markdown-body p-6 overflow-y-auto max-h-[70vh] font-sans select-text"
+                    dangerouslySetInnerHTML={{ __html: marked.parse(readmeText || "") }}/> 
+                : <p>{readmeText}</p> }
+
             {/* <Document file="/files/Resume.pdf">
                 <Page pageNumber={1} 
                 scale={1.15}
