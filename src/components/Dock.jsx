@@ -92,7 +92,7 @@ const Dock = () => {
                             style={{ transform: `scale(${scale || 1})` }}
                         >
                             <img 
-                                src={`files/icons/${icon}`} 
+                                src={`/files/icons/${icon}`} 
                                 alt={name}
                                 loading="lazy"
                                 className={canOpen ? '' : 'opacity-100'}
