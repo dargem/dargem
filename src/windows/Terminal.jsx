@@ -9,7 +9,7 @@ const Terminal = () => {
     </div>
 
     <div className="techstack">
-        <p>
+        <span>
             <span className="font-bold">(base) @Tristan:~% td$ </span>
             whoami
             <br />
@@ -23,7 +23,7 @@ const Terminal = () => {
 
             <br />
             <br />
-            <ul class="list-disc list-inside pl-5">
+            <ul className="list-disc list-inside pl-5">
                 <li>Data orientated design</li>
                 <li>Humanoid soccer robots</li>
                 <li>Template metaprogramming</li>
@@ -45,7 +45,7 @@ const Terminal = () => {
             and in the trash bin lies projects I've scrapped.
             The blog consists of a large series of interesting benchmarks and C++ features.
             Click on the cross, or alternatively the terminal in the dock to close this.
-        </p>
+        </span>
 
     </div>
     </>;

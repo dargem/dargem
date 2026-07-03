@@ -3,7 +3,7 @@ import { Draggable } from "gsap/all";
 import { useMemo } from "react";
 
 import { NavBar, Dock, Desktop } from "#components";
-import { TerminalWindow, ResumeWindow, ContactWindow, MarkdownWindowContent } from "#windows";
+import { TerminalWindow, ResumeWindow, ContactWindow, MarkdownWindowContent, BlogsWindow } from "#windows";
 import WindowWrapper from "#hoc/WindowWrapper";
 import { markdownWindowsList } from "#store/window.js";
 
@@ -30,6 +30,7 @@ const App = () => {
             <TerminalWindow/>
             <ContactWindow/>
             <ResumeWindow/>
+            {/* <BlogsWindow/> */}
 
             {dynamicWindows.map(({ key, Wrapped }) => (
                 <Wrapped key={key} />
