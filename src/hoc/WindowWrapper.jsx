@@ -157,7 +157,10 @@ const WindowWrapper = (Component, windowKey) => {
             <section 
                 id={windowKey} 
                 ref={ref}
-                style={{ zIndex }}
+                style={{
+                    zIndex,
+                    "--window-height": size ? `${size.height}px` : "70vh",
+                }}
                 className="absolute"
             >
                 <Component {... props}/>

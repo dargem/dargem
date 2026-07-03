@@ -12,7 +12,8 @@ const MarkdownWindowContent = ({ title, content, windowKey }) => {
             </div>
 
             <div 
-                className="markdown-body p-6 overflow-y-auto max-h-[70vh] font-sans select-text"
+                className="markdown-body overflow-y-auto p-6 font-sans select-text"
+                style={{ maxHeight: "calc(var(--window-height, 70vh) - 56px)" }}
                 dangerouslySetInnerHTML={{ __html: htmlContent }}
             />
         </>
