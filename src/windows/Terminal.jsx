@@ -40,11 +40,13 @@ const Terminal = () => {
 
             <br />
             <br />
-            Click on the navbar /or folders to create a window. 
-            Each of the desktop folders are my personal projects,
-            and in the trash bin lies projects I've scrapped.
+            To navigate the site click on the navbar /or folders to create a window. 
+            Each of the desktop folders are my personal projects, and in the trash bin lies projects I've scrapped.
             The blog consists of a large series of interesting benchmarks and C++ features.
+            Click on the bottom right draggable or the green expand button to resize a window.
+            To drag windows around, click and drag on the window's top bar.
             Click on the cross, or alternatively the terminal in the dock to close this.
+            If you find the text too small zoom in and things will rescale properly.
         </span>
 
     </div>

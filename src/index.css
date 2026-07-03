@@ -156,7 +156,7 @@ body {
         }
         
         .blog {
-            @apply bg-white p-10 max-w-3xl mx-auto;
+            @apply bg-white p-10 max-w-4xl mx-auto;
             
             h2 {
                 @apply text-xl font-bold text-pink-600 mb-10;
@@ -189,7 +189,7 @@ body {
     }
     
     #terminal {
-        @apply w-xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+        @apply w-3xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
         
         h2 {
             @apply font-bold text-sm text-center w-full;
@@ -269,7 +269,7 @@ body {
     }
 
     #blogs {
-        @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden gap-2;
+        @apply max-w-4xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden gap-2;
     }
     
     #photos {
