@@ -13,7 +13,7 @@ const Blogs = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const url = "https://github.com/dargem/benchmark_fun/edit/main/README.md";
+        const url = "https://raw.githubusercontent.com/dargem/benchmark_fun/main/README.md";
         fetch(url)
         .then((response) => {
             if (!response.ok) {
