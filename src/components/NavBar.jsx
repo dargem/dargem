@@ -24,7 +24,7 @@ const NavBar = () => {
     return (
         <nav>
             <div>
-                <img src="/files/images/arch_logo.png" alt="logo" className="h-6"/>
+                <img src="/files/images/portfolio.png" alt="logo" className="h-6"/>
                 <p className="font-bold">My Portfolio</p>
                 <ul>
                     {navLinks.map(({ id, name, type }) => (
