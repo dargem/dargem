@@ -19,7 +19,7 @@ const navLinks = [
 const navIcons = [
     {
         id: "wifi",
-        img: "/files/icons/wifi.png",
+        img: "/files/icons/wifi.webp",
     },
     {
         id: "battery",
