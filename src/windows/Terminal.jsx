@@ -3,6 +3,8 @@ import WindowWrapper from "#hoc/WindowWrapper";
 import WindowControls from "#components/WindowControls";
 import useWindowStore from "#store/window.js";
 
+const markdownFiles = import.meta.glob("../markdown/*.md", { query: "?raw", import: "default", eager: true });
+
 const VIRTUAL_FILES = {
     "about_me.txt": `I'm an undergrad at the University of Newcastle, studying a double in computer & data science.
 In my spare time I like learning topics that peak my fancy, ranging from:
@@ -27,6 +29,12 @@ To drag windows around, click and drag on the window's top bar.
 Click on the cross, or alternatively the terminal in the dock to close this.
 If you find the text too small, zoom in with Ctrl +/-.`
 };
+
+// Dynamically add markdown files to VIRTUAL_FILES
+Object.entries(markdownFiles).forEach(([path, content]) => {
+    const filename = path.split("/").pop();
+    VIRTUAL_FILES[filename] = content;
+});
 
 
 const handleCommand = (cmd) => {
@@ -61,10 +69,11 @@ const handleCommand = (cmd) => {
                 return { type: "output", text: "usage: cat [file]" };
             }
             const filename = args[0].toLowerCase();
-            if (VIRTUAL_FILES[filename]) {
+            const actualKey = Object.keys(VIRTUAL_FILES).find(key => key.toLowerCase() === filename);
+            if (actualKey && VIRTUAL_FILES[actualKey]) {
                 return {
                     type: "output",
-                    text: VIRTUAL_FILES[filename]
+                    text: VIRTUAL_FILES[actualKey]
                 };
             } else {
                 return { type: "output", text: `cat: ${args[0]}: No such file or directory` };
