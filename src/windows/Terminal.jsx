@@ -6,9 +6,8 @@ import useWindowStore from "#store/window.js";
 const markdownFiles = import.meta.glob("../markdown/*.md", { query: "?raw", import: "default", eager: true });
 
 const VIRTUAL_FILES = {
-    "about_me.txt": `I'm an undergrad at the University of Newcastle, studying a double in computer & data science.
+    "about_me.txt": `I'm an undergrad at the University of Newcastle, studying a double in computer & data science. \
 In my spare time I like learning topics that peak my fancy, ranging from:
-
   • Data orientated design
   • Humanoid soccer robots
   • Template metaprogramming
@@ -17,17 +16,20 @@ In my spare time I like learning topics that peak my fancy, ranging from:
   • Random number generators
   • Questionable C++ "features"`,
 
-    "languages.txt": `My languages are C++, Java, Python and R. My preference is C++ for my larger performance critical side projects and Java where performance isn't a concern.
-Python I use for competitive programming as well as for my quick and dirty projects.
-R is nice to use for statistical testing but I find not much else.`,
+    "languages.txt": `My languages are C++, Java, Python and R. My preference is C++ for my larger performance critical side projects and Java where performance isn't a concern. \
+Python I use for competitive programming as well as for my quick and dirty projects. \
+R is nice to use for statistical testing but I find not much else.`, 
 
-    "instructions.txt": `To navigate the site click on the navbar or folders to create a window.
-Each of the desktop folders are my personal projects, and in the trash bin lies projects I've scrapped.
-The blog consists of a large series of interesting benchmarks and C++ features.
-Click on the bottom right draggable or the green expand button to resize a window.
-To drag windows around, click and drag on the window's top bar.
-Click on the cross, or alternatively the terminal in the dock to close this.
-If you find the text too small, zoom in with Ctrl +/-.`
+    "instructions.txt": `To navigate the site click on the navbar or folders to create a window. \
+Each of the desktop folders are my personal projects, and in the trash bin lies projects I've scrapped. \
+The blog consists of a large series of interesting benchmarks and C++ features. \
+Click on the bottom right draggable or the green expand button to resize a window. \
+To drag windows around, click and drag on the window's top bar. \
+Click on the cross, or alternatively the terminal in the dock to close this. \
+If you find the text too small, zoom in with Ctrl +/-. \
+Alternatively print the md files through the command line. \
+Use help to see what is available.
+`
 };
 
 // Dynamically add markdown files to VIRTUAL_FILES
