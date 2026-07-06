@@ -189,47 +189,33 @@ body {
     }
     
     #terminal {
-        @apply w-3xl absolute top-32 left-1/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+        @apply w-3xl absolute top-32 left-1/12 bg-[#1e1e2e] text-[#cdd6f4] shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden border border-[#313244];
+        
+        .window-header {
+            @apply bg-[#181825] border-b border-[#313244] text-[#a6adc8];
+        }
         
         h2 {
-            @apply font-bold text-sm text-center w-full;
+            @apply font-bold text-sm text-center w-full text-[#cdd6f4];
         }
         
         .techstack {
-            @apply text-sm font-roboto p-5;
+            @apply text-sm font-terminal p-5 overflow-y-auto bg-[#1e1e2e] text-[#cdd6f4] select-text;
+            height: calc(var(--window-height, 70vh) - 45px);
             
-            .label {
-                @apply flex items-center ms-10 mt-7;
+            /* Custom scrollbar for terminal */
+            &::-webkit-scrollbar {
+                width: 8px;
             }
-            
-            .content {
-                @apply py-5 my-5 border-y border-dashed space-y-1;
-                
-                li {
-                    .check {
-                        @apply text-[#00A154] w-5;
-                    }
-                    
-                    h3 {
-                        @apply font-semibold text-[#00A154] w-32 ms-5;
-                    }
-                    
-                    ul {
-                        @apply flex items-center gap-3;
-                    }
-                }
+            &::-webkit-scrollbar-track {
+                background: #181825;
             }
-            
-            .footnote {
-                @apply text-[#00A154] space-y-1;
-                
-                p {
-                    @apply flex items-center;
-                    
-                    svg {
-                        @apply w-5 me-5;
-                    }
-                }
+            &::-webkit-scrollbar-thumb {
+                background: #45475a;
+                border-radius: 4px;
+            }
+            &::-webkit-scrollbar-thumb:hover {
+                background: #585b70;
             }
         }
     }
