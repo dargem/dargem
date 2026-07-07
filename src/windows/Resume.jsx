@@ -31,7 +31,7 @@ const Resume = () => {
 
             <Document file="/files/Resume.pdf">
                 <Page pageNumber={1} 
-                scale={1.25}
+                scale={1.15}
                 renderTextlayer 
                 renderAnnotationLayer 
             />
