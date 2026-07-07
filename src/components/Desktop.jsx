@@ -1,7 +1,7 @@
 import useWindowStore, { markdownWindowsList } from "#store/window.js";
 
 const Desktop = () => {
-    const { openWindow } = useWindowStore();
+    const { openWindow, closeWindow, windows } = useWindowStore();
 
     return (
         <section id="home">
@@ -16,7 +16,9 @@ const Desktop = () => {
                             key={key}
                             className="group absolute select-none flex items-center flex-col cursor-pointer"
                             style={{ top: `${topPosition}px`, left: `${leftPosition}px` }}
-                            onClick={() => openWindow(key)}
+                            onClick={() => {
+                                windows[key].isOpen ? closeWindow(key) : openWindow(key);
+                            }}
                         >
                             <img
                                 src="/files/icons/folder.png"
