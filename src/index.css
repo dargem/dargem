@@ -208,7 +208,7 @@ body {
                 width: 8px;
             }
             &::-webkit-scrollbar-track {
-                background: #181825;
+                background: transparent;
             }
             &::-webkit-scrollbar-thumb {
                 background: #45475a;
@@ -424,6 +424,20 @@ body {
     .markdown-body {
         color: #1f2937;
         line-height: 1.6;
+        
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(156, 163, 175, 0.5);
+            border-radius: 4px;
+        }
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgba(156, 163, 175, 0.8);
+        }
         
         video, iframe {
             @apply w-full rounded-lg my-4 aspect-video;
