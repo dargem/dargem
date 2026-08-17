@@ -23,7 +23,7 @@ const Desktop = () => {
                             <img
                                 src="/files/icons/folder.png"
                                 alt={title}
-                                className="w-20 h-20 object-contain p-1 rounded-md group-hover:bg-gray-950/10 transition-colors"
+                                className="w-23 h-23 object-contain p-1 rounded-md group-hover:bg-gray-950/10 transition-colors"
                             />
                                 <p className="mt-1 w-24 px-1.5 py-0.5 text-sm leading-tight text-center text-white whitespace-normal break-words rounded-md group-hover:bg-blue-500 transition-colors">
                                 {title}

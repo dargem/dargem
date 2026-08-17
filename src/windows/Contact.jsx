@@ -1,5 +1,6 @@
 import WindowWrapper from "#hoc/WindowWrapper";
-import { WindowControls } from "#components/index.js";
+import { WindowControls, LinkedInWidget } from "#components/index.js";
+import { linkedInWidgetId } from "#constants/index.js";
 
 const Contact = () => {
     return <>
@@ -7,6 +8,7 @@ const Contact = () => {
         <WindowControls target="contact"/>
         <h2>My Contacts</h2>
     </div>
+    <div className="overflow-y-auto pb-6" style={{ maxHeight: "calc(var(--window-height, 70vh) - 56px)" }}>
         <ul>
             <li>
                 <a className="items-center" href="https://github.com/dargem"><img src="/files/images/github.png" alt="logo" className="h-8"/> Github </a>
@@ -23,8 +25,8 @@ const Contact = () => {
             <br/>
             c3412030@uon.edu.au
         </p>
-    <div>
-        
+
+        <LinkedInWidget widgetId={linkedInWidgetId} />
     </div>
     </>;
 };

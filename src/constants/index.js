@@ -199,6 +199,8 @@ const gallery = [
     },
 ];
 
+const linkedInWidgetId = '45082600-3d69-41c9-9c68-f930d94767ea';
+
 export {
     navLinks,
     navIcons,
@@ -208,6 +210,7 @@ export {
     socials,
     photosLinks,
     gallery,
+    linkedInWidgetId,
 };
 
 const WORK_LOCATION = {
