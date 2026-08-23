@@ -488,6 +488,12 @@ export const locations = {
 
 const INITIAL_Z_INDEX = 1000;
 
+const markdownLinks = [
+    // Add your GitHub README links here
+    // { title: "Dargem", url: "https://github.com/tristan-vane/dargem/blob/main/README.md" }
+    { title: "GeminiAPI", url: "https://github.com/dargem/copilot-gemini-wrapper/blob/main/README.md" }
+];
+
 const WINDOW_CONFIG = {
     finder: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     contact: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
@@ -500,4 +506,4 @@ const WINDOW_CONFIG = {
     imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
-export { INITIAL_Z_INDEX, WINDOW_CONFIG };
+export { INITIAL_Z_INDEX, WINDOW_CONFIG, markdownLinks };

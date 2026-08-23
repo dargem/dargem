@@ -161,7 +161,7 @@ const WindowWrapper = (Component, windowKey) => {
                     zIndex,
                     "--window-height": size ? `${size.height}px` : "70vh",
                 }}
-                className="absolute pb-6"
+                className="absolute overflow-hidden rounded-xl pb-4"
             >
                 <Component {... props}/>
                 {isOpen && (

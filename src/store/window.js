@@ -1,22 +1,31 @@
-import { INITIAL_Z_INDEX } from "#constants";
-import { WINDOW_CONFIG } from "#constants";
+import { INITIAL_Z_INDEX, WINDOW_CONFIG, markdownLinks } from "#constants";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 const markdownFiles = import.meta.glob('../markdown/*.md', { query: '?raw', import: 'default', eager: true });
 
-export const markdownWindowsList = Object.keys(markdownFiles).map((path) => {
-    const filename = path.split('/').pop().replace('.md', '');
-    const windowKey = `markdown-${filename.toLowerCase()}`;
-    return {
-        key: windowKey,
-        title: filename,
-        content: markdownFiles[path]
-    };
-});
+export const markdownWindowsList = [
+    ...Object.keys(markdownFiles).map((path) => {
+        const filename = path.split('/').pop().replace('.md', '');
+        const windowKey = `markdown-${filename.toLowerCase()}`;
+        return {
+            key: windowKey,
+            title: filename,
+            content: markdownFiles[path]
+        };
+    }),
+    ...markdownLinks.map((link) => {
+        const windowKey = `markdown-${link.title.toLowerCase().replace(/\s+/g, '-')}`;
+        return {
+            key: windowKey,
+            title: link.title,
+            url: link.url
+        };
+    })
+].sort((a, b) => a.title.localeCompare(b.title));
 
 const markdownWindows = {};
-markdownWindowsList.forEach(({ key, title, content }) => {
+markdownWindowsList.forEach(({ key, title, content, url }) => {
     markdownWindows[key] = {
         isOpen: false,
         size: null,
@@ -24,7 +33,8 @@ markdownWindowsList.forEach(({ key, title, content }) => {
         zIndex: INITIAL_Z_INDEX,
         data: {
             title,
-            content
+            content,
+            url
         }
     };
 });
@@ -49,7 +59,6 @@ const useWindowStore = create(
             const win = state.windows[windowKey];
             win.isOpen = false;
             win.zIndex = INITIAL_Z_INDEX;
-            win.data = null;
         }),
 
         focusWindow: (windowKey) => set((state) => {

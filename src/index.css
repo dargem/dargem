@@ -125,6 +125,8 @@ body {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
         align-items: center;
+        position: relative;
+        z-index: 100;
         @apply px-4 py-3 rounded-t-lg bg-gray-50 border-b border-gray-200 select-none text-sm text-gray-700;
 
         & > :nth-child(1) {
@@ -221,7 +223,7 @@ body {
     }
 
     #contact {
-        @apply max-w-2xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+        @apply max-w-4xl w-[850px] absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
         
         h2 {
             @apply font-bold text-sm text-center w-full;

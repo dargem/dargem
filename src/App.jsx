@@ -11,9 +11,9 @@ gsap.registerPlugin(Draggable);
 
 const App = () => {
     const dynamicWindows = useMemo(() => {
-        return markdownWindowsList.map(({ key, title, content }) => {
+        return markdownWindowsList.map(({ key, title, content, url }) => {
             const Component = () => (
-                <MarkdownWindowContent title={title} content={content} windowKey={key} />
+                <MarkdownWindowContent title={title} content={content} url={url} windowKey={key} />
             );
             Component.displayName = `Markdown_${title}`;
             const Wrapped = WindowWrapper(Component, key);
