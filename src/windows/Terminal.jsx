@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import WindowWrapper from "#hoc/WindowWrapper";
 import WindowControls from "#components/WindowControls";
-import useWindowStore from "#store/window.js";
-
-const markdownFiles = import.meta.glob("../markdown/*.md", { query: "?raw", import: "default", eager: true });
+import useWindowStore, { markdownWindowsList } from "#store/window.js";
 
 const VIRTUAL_FILES = {
     "about_me.txt": `I'm an undergrad at the University of Newcastle, studying a double in computer & data science. \
@@ -33,19 +31,26 @@ Use help to see what is available.
 };
 
 // Dynamically add markdown files to VIRTUAL_FILES
-Object.entries(markdownFiles).forEach(([path, content]) => {
-    const filename = path.split("/").pop();
-    VIRTUAL_FILES[filename] = content;
+markdownWindowsList.forEach(({ title, content, url }) => {
+    const filename = `${title}.md`;
+    VIRTUAL_FILES[filename] = content || { url };
 });
 
 
-const handleCommand = (cmd) => {
+const handleCommand = async (cmd) => {
     const trimmed = cmd.trim();
     if (!trimmed) {
         return { type: "output", text: "" };
     }
 
-    const parts = trimmed.split(" ");
+    // Regex to split by spaces but keep quoted strings together
+    const parts = trimmed.match(/[^\s"']+|"([^"]*)"|'([^']*)'/g).map(part => {
+        if ((part.startsWith('"') && part.endsWith('"')) || (part.startsWith("'") && part.endsWith("'"))) {
+            return part.slice(1, -1);
+        }
+        return part;
+    });
+
     const command = parts[0].toLowerCase();
     const args = parts.slice(1);
 
@@ -56,7 +61,7 @@ const handleCommand = (cmd) => {
                 text: `Available commands:
   help         - Show this help menu
   ls           - List files
-  cat [file]   - Display file contents
+  cat [file]   - Display file contents (use quotes for spaces)
   whoami       - Display current user info
   clear        - Clear the terminal screen
   exit         - Close the terminal window`
@@ -64,7 +69,7 @@ const handleCommand = (cmd) => {
         case "ls":
             return {
                 type: "output",
-                text: Object.keys(VIRTUAL_FILES).join("    ")
+                text: Object.keys(VIRTUAL_FILES).sort().join("    ")
             };
         case "cat":
             if (args.length === 0) {
@@ -72,14 +77,30 @@ const handleCommand = (cmd) => {
             }
             const filename = args[0].toLowerCase();
             const actualKey = Object.keys(VIRTUAL_FILES).find(key => key.toLowerCase() === filename);
-            if (actualKey && VIRTUAL_FILES[actualKey]) {
-                return {
-                    type: "output",
-                    text: VIRTUAL_FILES[actualKey]
-                };
-            } else {
-                return { type: "output", text: `cat: ${args[0]}: No such file or directory` };
+            if (actualKey) {
+                const fileData = VIRTUAL_FILES[actualKey];
+                if (typeof fileData === "string") {
+                    return {
+                        type: "output",
+                        text: fileData
+                    };
+                } else if (fileData.url) {
+                    try {
+                        const rawUrl = fileData.url
+                            .replace("github.com", "raw.githubusercontent.com")
+                            .replace("/blob/", "/");
+                        const response = await fetch(rawUrl);
+                        if (!response.ok) throw new Error("Failed to fetch");
+                        const text = await response.text();
+                        // Cache it for next time
+                        VIRTUAL_FILES[actualKey] = text;
+                        return { type: "output", text };
+                    } catch (err) {
+                        return { type: "output", text: `cat: ${args[0]}: Error fetching from GitHub` };
+                    }
+                }
             }
+            return { type: "output", text: `cat: ${args[0]}: No such file or directory` };
         case "whoami":
             return { type: "output", text: "td" };
         case "clear":
@@ -116,15 +137,19 @@ const Terminal = () => {
             "cat instructions.txt"
         ];
         
-        const initialHistory = [];
-        initialCommands.forEach((cmd) => {
-            initialHistory.push({ type: "input", text: cmd });
-            const result = handleCommand(cmd);
-            if (result.type !== "clear" && result.type !== "exit") {
-                initialHistory.push(result);
+        const runInitial = async () => {
+            const initialHistory = [];
+            for (const cmd of initialCommands) {
+                initialHistory.push({ type: "input", text: cmd });
+                const result = await handleCommand(cmd);
+                if (result.type !== "clear" && result.type !== "exit") {
+                    initialHistory.push(result);
+                }
             }
-        });
-        setHistory(initialHistory);
+            setHistory(initialHistory);
+        };
+        
+        runInitial();
     }, []);
 
     useEffect(() => {
@@ -139,26 +164,34 @@ const Terminal = () => {
         }
     };
 
-    const onInputKeyDown = (e) => {
+    const onInputKeyDown = async (e) => {
         if (e.key === "Enter") {
-            const newHistory = [...history, { type: "input", text: inputVal }];
-            const result = handleCommand(inputVal);
+            const currentInput = inputVal;
+            const newHistory = [...history, { type: "input", text: currentInput }];
+            setHistory(newHistory);
+            setInputVal("");
+
+            const result = await handleCommand(currentInput);
 
             if (result.type === "clear") {
                 setHistory([]);
             } else if (result.type === "exit") {
                 closeWindow("terminal");
             } else {
-                setHistory([...newHistory, result]);
+                setHistory((prev) => {
+                    // If the user cleared the screen while we were fetching, don't add the result
+                    if (prev.length === 0 && result.type !== "clear") {
+                         // This is a bit tricky, but usually we just want to append
+                    }
+                    return [...prev, result];
+                });
             }
 
-            if (inputVal.trim()) {
-                const newCmdHistory = [...commandHistory, inputVal];
+            if (currentInput.trim()) {
+                const newCmdHistory = [...commandHistory, currentInput];
                 setCommandHistory(newCmdHistory);
                 setHistoryIndex(newCmdHistory.length);
             }
-
-            setInputVal("");
         } else if (e.key === "ArrowUp") {
             e.preventDefault();
             if (commandHistory.length > 0 && historyIndex > 0) {
