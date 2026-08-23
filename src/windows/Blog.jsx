@@ -1,5 +1,6 @@
 import { WindowControls } from "#components/index.js";
 import WindowWrapper from "#hoc/WindowWrapper";
+import { injectStandaloneMediaEmbeds } from "#utils/markdownEmbeds.js";
 
 import React, { useState, useEffect } from 'react';
 import { marked } from "marked";
@@ -25,7 +26,7 @@ const renderMarkdownWithHeadingIds = (markdown) => {
         /\[\[no_unique_address\]\]/g,
         "\\[\\[no_unique_address\\]\\]"
     );
-    const html = marked.parse(normalizedMarkdown);
+    const html = marked.parse(injectStandaloneMediaEmbeds(normalizedMarkdown));
     const document = new DOMParser().parseFromString(html, "text/html");
     const counts = new Map();
 

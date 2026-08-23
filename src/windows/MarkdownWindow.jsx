@@ -1,6 +1,7 @@
 import { WindowControls } from "#components/index.js";
 import { marked } from "marked";
 import { useEffect, useState } from "react";
+import { injectStandaloneMediaEmbeds } from "#utils/markdownEmbeds.js";
 
 const MarkdownWindowContent = ({ title, content, url, windowKey }) => {
     const [markdown, setMarkdown] = useState(content || "");
@@ -27,7 +28,7 @@ const MarkdownWindowContent = ({ title, content, url, windowKey }) => {
         }
     }, [url, content]);
 
-    const htmlContent = marked.parse(markdown || "");
+    const htmlContent = marked.parse(injectStandaloneMediaEmbeds(markdown || ""));
 
     return (
         <>

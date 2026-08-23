@@ -1,1 +1,0 @@
-You're absolutely right is a life changing discord bot that affirms your brilliant ideas.
