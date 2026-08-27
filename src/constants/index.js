@@ -14,6 +14,11 @@ const navLinks = [
         name: "Resume",
         type: "resume",
     },
+    {
+        id: 5,
+        name: "GitHub",
+        type: "github",
+    },
 ];
 
 const navIcons = [
@@ -506,6 +511,7 @@ const WINDOW_CONFIG = {
     terminal: { isOpen: true, zIndex: INITIAL_Z_INDEX, data: null },
     txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
     imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+    github: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG, markdownLinks };

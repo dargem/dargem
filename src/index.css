@@ -259,6 +259,10 @@ body {
     #blogs {
         @apply max-w-4xl absolute top-60 left-5/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden gap-2;
     }
+
+    #github {
+        @apply max-w-4xl w-[850px] absolute top-40 left-3/12 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
+    }
     
     #photos {
         @apply max-w-3xl absolute top-96 left-1/2 -translate-y-1/2 bg-white shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden;
