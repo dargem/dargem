@@ -63,8 +63,39 @@ const handleCommand = async (cmd) => {
   ls           - List files
   cat [file]   - Display file contents (use quotes for spaces)
   whoami       - Display current user info
+  fastfetch    - Display system information
   clear        - Clear the terminal screen
   exit         - Close the terminal window`
+            };
+        case "fastfetch":
+            return {
+                type: "output",
+                isFastfetch: true,
+                text: `                  -\`                     tristan@archlinux
+                 .o+\`                    -----------------
+                \`ooo/                    OS: Arch Linux x86_64
+               \`+oooo:                   Host: 83M0 (Legion 5 15AHP10)
+              \`+oooooo:                  Kernel: Linux 7.1.9-zen1-2-zen
+              -+oooooo+:                 Uptime: 9 mins
+            \`/:-:++oooo+:                Packages: 8 (flatpak), 1612 (pacman)
+           \`/++++/+++++++:               Shell: fish 4.8.1
+          \`/++++++++++++++:              Display (N153JMA-G51): 1920x1200 in 15", 165 Hz [Built-in]
+         \`/+++ooooooooooooo/\`            WM: Hyprland 0.56.2 (Wayland)
+        ./ooosssso++osssssso+\`           Theme: Breeze-Dark [GTK2], Breeze [GTK3]
+       .oossssso-\`\`\`\`/ossssss+\`          Icons: breeze-dark [GTK2/3/4]
+      -osssssso.      :ssssssso.         Font: Google Sans Flex Medium (11pt) [GTK2/3/4]
+     :osssssss/        osssso+++.        Cursor: breeze (24px)
+    /ossssssss/        +ssssooo/-        Terminal: kitty 0.48.2
+  \`/ossssso+/:-        -:/+osssso+-      Terminal Font: JetBrainsMonoNF-Regular (11pt)
+ \`+sso+:-\`                 \`.-/+oso:     CPU: AMD Ryzen 7 260 (16) @ 5.10 GHz
+\`++:.                           \`-/+/    GPU 1: NVIDIA GeForce RTX 5060 Max-Q / Mobile [Discrete]
+.\`                                 \`/    GPU 2: AMD Radeon 780M Graphics [Integrated]
+                                         Memory: 5.20 GiB / 14.92 GiB (35%)
+                                         Swap: 0 B / 4.00 GiB (0%)
+                                         Disk (/): 360.65 GiB / 475.94 GiB (76%) - btrfs
+                                         Local IP (wlan0): 10.222.199.105/16
+                                         Battery (L23D4PK4): 50% [AC Connected, Charging]
+                                         Locale: en_US.UTF-8`
             };
         case "ls":
             return {
@@ -218,6 +249,47 @@ const Terminal = () => {
                 <div key={index} className="flex items-center gap-1">
                     <span className="text-green-400 font-bold shrink-0">(base) @Tristan:~% </span>
                     <span className="text-yellow-200 font-semibold">{item.text}</span>
+                </div>
+            );
+        } else if (item.isFastfetch) {
+            const lines = item.text.split("\n");
+            return (
+                <div key={index} className="whitespace-pre-wrap text-gray-300 leading-relaxed my-1 font-terminal">
+                    {lines.map((line, lineIdx) => {
+                        const logoPart = line.slice(0, 41);
+                        const infoPart = line.slice(41);
+
+                        let renderedInfo;
+                        if (infoPart.includes("@")) {
+                            const parts = infoPart.split("@");
+                            renderedInfo = (
+                                <>
+                                    <span className="text-[#89dceb] font-bold">{parts[0]}</span>
+                                    <span className="text-gray-300">@</span>
+                                    <span className="text-[#89dceb] font-bold">{parts[1]}</span>
+                                </>
+                            );
+                        } else if (infoPart.includes(":")) {
+                            const colonIndex = infoPart.indexOf(":");
+                            const key = infoPart.slice(0, colonIndex + 1);
+                            const value = infoPart.slice(colonIndex + 1);
+                            renderedInfo = (
+                                <>
+                                    <span className="text-[#89dceb] font-bold">{key}</span>
+                                    <span className="text-gray-300">{value}</span>
+                                </>
+                            );
+                        } else {
+                            renderedInfo = <span className="text-gray-300">{infoPart}</span>;
+                        }
+
+                        return (
+                            <div key={lineIdx}>
+                                <span className="text-[#89dceb] font-extrabold font-roboto" style={{ letterSpacing: "0.08em" }}>{logoPart}</span>
+                                {renderedInfo}
+                            </div>
+                        );
+                    })}
                 </div>
             );
         } else {

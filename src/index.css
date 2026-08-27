@@ -191,7 +191,7 @@ body {
     }
     
     #terminal {
-        @apply w-3xl absolute top-32 left-1/12 bg-[#1e1e2e] text-[#cdd6f4] shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden border border-[#313244];
+        @apply w-5xl absolute top-32 left-1/12 bg-[#1e1e2e] text-[#cdd6f4] shadow-2xl drop-shadow-2xl rounded-xl overflow-hidden border border-[#313244];
         
         .window-header {
             @apply bg-[#181825] border-b border-[#313244] text-[#a6adc8];
