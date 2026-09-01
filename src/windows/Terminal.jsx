@@ -9,17 +9,17 @@ In my spare time I like learning topics that peak my fancy, ranging from:
   • Data orientated design
   • Humanoid soccer robots
   • Template metaprogramming
-  • Competitive programming
+  • Competitive programming & Algorithms
   • Benchmarking programs
   • Random number generators
-  • Questionable C++ "features"`,
+  • Modern and questionable C++ "features"`,
 
     "languages.txt": `My languages are C++, Java, Python and R. My preference is C++ for my larger performance critical side projects and Java where performance isn't a concern. \
-Python I use for competitive programming as well as for my quick and dirty projects. \
+Python I use for competitive programming, analytics and anything I don't mind being done quick and dirty. \
 R is nice to use for statistical testing but I find not much else.`, 
 
     "instructions.txt": `To navigate the site click on the navbar or folders to create a window. \
-Each of the desktop folders are my personal projects, and in the trash bin lies projects I've scrapped. \
+Desktop folders contain markdown of my personal project. \
 The blog consists of a large series of interesting benchmarks and C++ features. \
 Click on the bottom right draggable or the green expand button to resize a window. \
 To drag windows around, click and drag on the window's top bar. \
@@ -133,7 +133,7 @@ const handleCommand = async (cmd) => {
             }
             return { type: "output", text: `cat: ${args[0]}: No such file or directory` };
         case "whoami":
-            return { type: "output", text: "td" };
+            return { type: "output", text: "tristan-dyson" };
         case "clear":
             return { type: "clear" };
         case "exit":
