@@ -144,9 +144,10 @@ const handleCommand = async (cmd) => {
 };
 
 const Terminal = () => {
-    const { closeWindow } = useWindowStore();
+    const { closeWindow, windows } = useWindowStore();
     const [inputVal, setInputVal] = useState("");
     const [history, setHistory] = useState([]);
+    const [isInputFocused, setIsInputFocused] = useState(false);
 
     const [commandHistory, setCommandHistory] = useState([
         "whoami",
@@ -158,6 +159,7 @@ const Terminal = () => {
 
     const terminalRef = useRef(null);
     const inputRef = useRef(null);
+    const isTerminalOpen = windows.terminal.isOpen;
 
     // Run initial commands on first open
     useEffect(() => {
@@ -183,6 +185,18 @@ const Terminal = () => {
         runInitial();
     }, []);
 
+    const focusTerminalInput = () => {
+        if (inputRef.current) {
+            inputRef.current.focus({ preventScroll: true });
+        }
+    };
+
+    useEffect(() => {
+        if (isTerminalOpen) {
+            focusTerminalInput();
+        }
+    }, [isTerminalOpen]);
+
     useEffect(() => {
         if (terminalRef.current) {
             terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
@@ -190,9 +204,7 @@ const Terminal = () => {
     }, [history]);
 
     const handleTerminalClick = () => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
+        focusTerminalInput();
     };
 
     const onInputKeyDown = async (e) => {
@@ -313,20 +325,29 @@ const Terminal = () => {
                 onClick={handleTerminalClick}
                 className="techstack"
             >
+                <input
+                    ref={inputRef}
+                    type="text"
+                    value={inputVal}
+                    onChange={(e) => setInputVal(e.target.value)}
+                    onKeyDown={onInputKeyDown}
+                    onFocus={() => setIsInputFocused(true)}
+                    onBlur={() => setIsInputFocused(false)}
+                    aria-hidden="true"
+                    tabIndex={-1}
+                    className="fixed left-0 top-0 h-px w-px opacity-0 pointer-events-none"
+                />
                 <div className="flex flex-col gap-1">
                     {history.map((item, index) => renderHistoryItem(item, index))}
                     
                     <div className="flex items-center gap-1 mt-1">
                         <span className="text-green-400 font-bold shrink-0">(base) @Tristan:~% </span>
-                        <input
-                            ref={inputRef}
-                            type="text"
-                            value={inputVal}
-                            onChange={(e) => setInputVal(e.target.value)}
-                            onKeyDown={onInputKeyDown}
-                            className="flex-1 bg-transparent border-none outline-none text-yellow-200 font-semibold font-terminal p-0 m-0 caret-green-400"
-                            autoFocus
-                        />
+                        <span className="flex-1 min-h-[1em] whitespace-pre-wrap break-words text-yellow-200 font-semibold font-terminal p-0 m-0">
+                            {inputVal}
+                            {isInputFocused && (
+                                <span className="terminal-caret" aria-hidden="true" />
+                            )}
+                        </span>
                     </div>
                 </div>
             </div>

@@ -220,6 +220,25 @@ body {
                 background: #585b70;
             }
         }
+
+        .terminal-caret {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0.15rem;
+            width: 1px;
+            height: 1.05em;
+            background: #4ade80;
+            animation: terminal-caret-blink 1s steps(1, end) infinite;
+        }
+    }
+
+    @keyframes terminal-caret-blink {
+        0%, 49% {
+            opacity: 1;
+        }
+        50%, 100% {
+            opacity: 0;
+        }
     }
 
     #contact {
