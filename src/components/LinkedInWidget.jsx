@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const LinkedInWidget = ({ widgetId = null }) => {
     const [height, setHeight] = useState(600);
 
+    const iframeRef = useRef(null);
+
     useEffect(() => {
         const handleMessage = (event) => {
             // Only accept messages that look like our height updates
-            if (event.data && typeof event.data === 'object' && event.data.type === 'elfsight-height') {
+            // AND originate from our iframe's contentWindow to avoid cross-talk.
+            if (
+                iframeRef.current &&
+                event.source === iframeRef.current.contentWindow &&
+                event.data &&
+                typeof event.data === 'object' &&
+                event.data.type === 'elfsight-height'
+            ) {
                 setHeight(event.data.height);
             }
         };
@@ -72,6 +81,8 @@ const LinkedInWidget = ({ widgetId = null }) => {
             <iframe
                 title="LinkedIn Feed"
                 srcDoc={srcDoc}
+                ref={iframeRef}
+                sandbox="allow-scripts allow-popups"
                 width="100%"
                 height="100%"
                 frameBorder="0"
