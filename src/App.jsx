@@ -24,11 +24,11 @@ const isMobileDevice = () => {
 
 const MobileUnsupportedScreen = () => (
     <main className="min-h-dvh w-dvw overflow-hidden flex items-center justify-center px-6 text-center text-white">
-        <div className="max-w-md rounded-3xl border border-white/10 bg-slate-950/70 p-8 shadow-2xl backdrop-blur-xl">
+        <div className="max-w-md rounded-3xl border border-white/10 bg-slate-950/80 p-8 shadow-2xl backdrop-blur-xl">
             <p className="text-xs uppercase tracking-[0.3em] text-cyan-200/80">Site unavailable</p>
             <h1 className="mt-4 text-3xl font-bold text-white">Mobile screen not supported</h1>
             <p className="mt-4 text-sm leading-6 text-slate-200">
-                This portfolio is designed for desktop screens only. Please open it on a larger display to use the interactive windows.
+                This desktop styled portfolio is designed for wider screens. Please open it on a larger display.
             </p>
         </div>
     </main>
