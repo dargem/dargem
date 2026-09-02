@@ -46,6 +46,19 @@ const App = () => {
         return () => window.removeEventListener("resize", updateMobileState);
     }, []);
 
+    // Prevent browser from scrolling the main viewport when offscreen elements (like iframes or inputs) are focused
+    useEffect(() => {
+        const handleScroll = () => {
+            window.scrollTo(0, 0);
+            document.documentElement.scrollTop = 0;
+            document.documentElement.scrollLeft = 0;
+            document.body.scrollTop = 0;
+            document.body.scrollLeft = 0;
+        };
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     const dynamicWindows = useMemo(() => {
         return markdownWindowsList.map(({ key, title, content, url }) => {
             const Component = () => (
