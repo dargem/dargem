@@ -202,8 +202,8 @@ body {
         }
         
         .techstack {
-            @apply text-sm font-terminal p-5 overflow-y-auto bg-[#1e1e2e] text-[#cdd6f4] select-text;
-            height: calc(var(--window-height, 70vh) - 45px);
+            @apply text-sm font-terminal pt-5 px-5 pb-2 overflow-y-auto bg-[#1e1e2e] text-[#cdd6f4] select-text;
+            height: calc(var(--window-height, 530px) - 61px);
             
             /* Custom scrollbar for terminal */
             &::-webkit-scrollbar {

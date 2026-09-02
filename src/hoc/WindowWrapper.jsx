@@ -159,7 +159,7 @@ const WindowWrapper = (Component, windowKey) => {
                 ref={ref}
                 style={{
                     zIndex,
-                    "--window-height": size ? `${size.height}px` : "70vh",
+                    "--window-height": size ? `${size.height}px` : "65vh",
                 }}
                 className="absolute overflow-hidden rounded-xl pb-4"
             >
