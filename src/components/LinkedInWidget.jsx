@@ -47,9 +47,12 @@ const LinkedInWidget = ({ widgetId = null }) => {
                     overflow: hidden; 
                     background: transparent;
                 }
-                /* Ensure the widget takes up the full width */
+                #widget-container {
+                    overflow: hidden;
+                }
                 .elfsight-app-${widgetId} { 
                     width: 100% !important; 
+                    overflow: hidden !important;
                 }
             </style>
         </head>
@@ -58,17 +61,19 @@ const LinkedInWidget = ({ widgetId = null }) => {
                 <div class="elfsight-app-${widgetId}"></div>
             </div>
             <script>
-                const container = document.getElementById('widget-container');
+                const widgetEl = document.querySelector('.elfsight-app-${widgetId}');
                 const sendHeight = () => {
-                    const height = document.documentElement.scrollHeight;
-                    window.parent.postMessage({ type: 'elfsight-height', height: height }, '*');
+                    const rawHeight = widgetEl ? widgetEl.scrollHeight : document.documentElement.scrollHeight;
+                    const safeHeight = Math.max(rawHeight, 320);
+                    window.parent.postMessage({ type: 'elfsight-height', height: safeHeight }, '*');
                 };
 
-                // Check height frequently as Elfsight loads dynamically
                 const observer = new ResizeObserver(sendHeight);
                 observer.observe(document.documentElement);
+                if (widgetEl) {
+                    observer.observe(widgetEl);
+                }
                 
-                // Fallback for browsers/cases where ResizeObserver might miss a beat
                 setInterval(sendHeight, 1000);
                 window.onload = sendHeight;
             </script>

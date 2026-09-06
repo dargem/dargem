@@ -204,7 +204,7 @@ const gallery = [
     },
 ];
 
-const linkedInWidgetId = '45082600-3d69-41c9-9c68-f930d94767ea';
+const linkedInWidgetId = '15379ab7-3a66-4053-a303-469240c62d27';
 
 export {
     navLinks,

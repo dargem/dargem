@@ -511,4 +511,19 @@ body {
             @apply text-blue-600 hover:underline;
         }
     }
+
+
+    .linkedin-widget {
+    position: relative;
+    }
+    .linkedin-widget::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45px;
+    background: #fff;
+    pointer-events: none;
+    }
 }
