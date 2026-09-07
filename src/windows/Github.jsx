@@ -67,7 +67,7 @@ const FALLBACK_ACTIVITY = [
         pull_request: {
             merged_at: "2026-05-10T14:30:00Z"
         }
-    }
+    },
 ];
 
 const CACHE_EXPIRY_MS = 15 * 60 * 1000; // 15 minutes
@@ -281,23 +281,33 @@ const Github = () => {
                                         const isPR = !!item.pull_request;
                                         const repoName = getRepoName(item.html_url);
                                         
-                                        // Determine state color and label
+                                        // Determine state color, label, icon, and icon color
                                         let stateColor = "bg-gray-100 text-gray-700";
                                         let stateLabel = item.state;
+                                        let IconComponent = IssueIcon;
+                                        let iconColor = "text-green-600";
                                         
                                         if (isPR) {
+                                            IconComponent = PullRequestIcon;
                                             if (item.pull_request?.merged_at || item.state === "closed") {
                                                 stateColor = "bg-purple-100 text-purple-700 border border-purple-200";
-                                                stateLabel = "Merged / Closed";
+                                                stateLabel = item.pull_request?.merged_at ? "Merged" : "Closed";
+                                                iconColor = "text-purple-500";
                                             } else {
                                                 stateColor = "bg-green-100 text-green-700 border border-green-200";
                                                 stateLabel = "Open";
+                                                iconColor = "text-green-600";
                                             }
                                         } else {
+                                            IconComponent = IssueIcon;
                                             if (item.state === "open") {
                                                 stateColor = "bg-green-100 text-green-700 border border-green-200";
+                                                stateLabel = "Open";
+                                                iconColor = "text-green-600";
                                             } else {
-                                                stateColor = "bg-red-100 text-red-700 border border-red-200";
+                                                stateColor = "bg-purple-100 text-purple-700 border border-purple-200";
+                                                stateLabel = "Closed";
+                                                iconColor = "text-purple-500";
                                             }
                                         }
 
@@ -310,11 +320,7 @@ const Github = () => {
                                                 className="flex items-start gap-4 p-4 hover:bg-gray-50 transition-colors group"
                                             >
                                                 <div className="mt-1 shrink-0">
-                                                    {isPR ? (
-                                                        <PullRequestIcon className="w-5 h-5 text-purple-500" />
-                                                    ) : (
-                                                        <IssueIcon className="w-5 h-5 text-green-600" />
-                                                    )}
+                                                    <IconComponent className={`w-5 h-5 ${iconColor}`} />
                                                 </div>
                                                 <div className="flex-1 min-w-0 space-y-1">
                                                     <div className="flex flex-wrap items-center gap-2">
