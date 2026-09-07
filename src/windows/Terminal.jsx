@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import WindowWrapper from "#hoc/WindowWrapper";
 import WindowControls from "#components/WindowControls";
 import useWindowStore, { markdownWindowsList } from "#store/window.js";
@@ -144,10 +144,11 @@ const handleCommand = async (cmd) => {
 };
 
 const Terminal = () => {
-    const { closeWindow, windows } = useWindowStore();
+    const { closeWindow, setWindowSize, windows } = useWindowStore();
     const [inputVal, setInputVal] = useState("");
     const [history, setHistory] = useState([]);
     const [isInputFocused, setIsInputFocused] = useState(false);
+    const [initialHistoryReady, setInitialHistoryReady] = useState(false);
 
     const [commandHistory, setCommandHistory] = useState([
         "whoami",
@@ -180,10 +181,39 @@ const Terminal = () => {
                 }
             }
             setHistory(initialHistory);
+            setInitialHistoryReady(true);
         };
         
         runInitial();
     }, []);
+
+    useLayoutEffect(() => {
+        if (!initialHistoryReady || !isTerminalOpen || windows.terminal.size) {
+            return;
+        }
+
+        const contentEl = terminalRef.current;
+        const windowEl = contentEl?.closest("section");
+        const headerEl = windowEl?.querySelector(".window-header");
+
+        if (!contentEl || !windowEl || !headerEl) {
+            return;
+        }
+
+        const contentHeight = Math.ceil(contentEl.scrollHeight);
+        const headerHeight = Math.ceil(headerEl.getBoundingClientRect().height);
+        const paddingBottom = 16;
+        const extraMargin = 10;
+        const targetHeight = Math.min(
+            Math.max(260, contentHeight + headerHeight + paddingBottom + extraMargin),
+            Math.round(window.innerHeight * 0.9)
+        );
+
+        setWindowSize("terminal", {
+            width: Math.round(windowEl.getBoundingClientRect().width),
+            height: targetHeight,
+        });
+    }, [initialHistoryReady, isTerminalOpen, setWindowSize, windows.terminal.size, history]);
 
     const focusTerminalInput = () => {
         if (inputRef.current) {
